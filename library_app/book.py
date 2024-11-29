@@ -1,5 +1,5 @@
-from library_app.config import BOOK_STATUS
-from library_app.storage import Storage
+from config import BOOK_STATUS
+from storage import Storage
 
 
 class Book:
@@ -12,12 +12,12 @@ class Book:
     ):
         """
         Конструктор класса Book. Инициализирует объект книги с заданными параметрами.
-
-        :param id: Уникальный идентификатор книги.
-        :param title: Название книги.
-        :param author: Автор книги.
-        :param year: Год издания книги.
-        :param status: Статус книги. По умолчанию используется второй статус из BOOK_STATUS.
+        Args:
+            id (int): Уникальный идентификатор книги.
+            title (str): Название книги.
+            author (str): Автор книги.
+            year (int): Год издания книги.
+            status (str): Статус книги. По умолчанию используется второй статус из BOOK_STATUS.
         """
         self.id = id
         self.title = title
@@ -29,7 +29,8 @@ class Book:
         """
         Возвращает строковое представление объекта книги.
 
-        :return: Строка, содержащая идентификатор, название, автора, год издания и статус книги.
+        Returns:
+            str: Строка, содержащая идентификатор, название, автора, год издания и статус книги.
         """
         return f"[{self.id}] {self.title} - {self.author} ({self.year}) - {self.status}"
 
@@ -37,8 +38,11 @@ class Book:
         """
         Изменяет статус книги на новый, если он допустим и отличается от текущего.
 
-        :param new_status: Новый статус книги.
-        :raises ValueError: Если новый статус недопустим или совпадает с текущим.
+        Args:
+            new_status (str): Новый статус книги.
+
+        Raises:
+            ValueError: Если новый статус недопустим или совпадает с текущим.
         """
         status_list = list(BOOK_STATUS.values())
         if not new_status in status_list:
@@ -57,6 +61,7 @@ class Book:
         """
         Обновляет статус книги в хранилище.
 
-        :param storage: Объект хранилища, который содержит метод save_books.
+        Args:
+             storage (Storage): Объект хранилища, который содержит метод save_books.
         """
         storage.save_books([self])
