@@ -1,4 +1,4 @@
-def get_integer_input(prompt):
+def get_integer_input(prompt: str) -> int:
     """Функция для получения целочисленного ввода от пользователя."""
     while True:
         try:
