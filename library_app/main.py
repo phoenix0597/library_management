@@ -1,9 +1,12 @@
-from library_app.config import BOOK_STATUS
-from library_app.library import Library
-from library_app.utils import get_integer_input
+from config import BOOK_STATUS
+from library import Library
+from utils import get_integer_input
 
 
-def main():
+def main() -> None:
+    """
+    Основная функция для управления библиотекой через консольное меню.
+    """
     library = Library()
     while True:
         print("\nБиблиотека")
@@ -14,18 +17,17 @@ def main():
         print("5. Изменить статус книги")
         print("6. Выход")
 
-        choice = input("Выберите действие: ")
+        choice: str = input("Выберите действие: ")
 
         if choice == "1":
-            title = input("Введите название книги: ")
-            author = input("Введите автора книги: ")
-            year = get_integer_input("Введите год издания книги: ")
-            book = library.add_book(title, author, year)
-            print(f"Книга добавлена: {book}")
+            title: str = input("Введите название книги: ")
+            author: str = input("Введите автора книги: ")
+            year: int = get_integer_input("Введите год издания книги: ")
+            library.add_book(title, author, year)
         elif choice == "2":
             # Добавляем цикл для повторного запроса корректного статуса
             while True:
-                id_ = int(input("Введите id книги: "))
+                id_: int = int(input("Введите id книги: "))
                 try:
                     library.remove_book(id_)
                     break  # Выходим из цикла, если статус изменен успешно
@@ -43,9 +45,9 @@ def main():
             for book in books:
                 print(book)
         elif choice == "5":
+            id_ = get_integer_input("Введите id книги: ")
             # Добавляем цикл для повторного запроса корректного id
             while True:
-                id_ = get_integer_input("Введите id книги: ")
                 if id_ in [book.id for book in library.books]:
                     new_status = input(
                         f"Введите новый статус книги (один из {list(BOOK_STATUS.values())}): "
