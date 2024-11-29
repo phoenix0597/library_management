@@ -1,8 +1,6 @@
 import json
 import os
 
-from library_app.book import Book
-
 
 class Storage:
     """
@@ -21,7 +19,7 @@ class Storage:
         """
         self.filename = filename
 
-    def save_books(self, books: list[Book]) -> None:
+    def save_books(self, books: list["Book"]) -> None:
         """
         Сохраняет список книг в файл.
 
@@ -36,12 +34,12 @@ class Storage:
         with open(self.filename, "w", encoding="utf-8") as lib_file:
             json.dump(data, lib_file, indent=4, ensure_ascii=False)
 
-    def load_books(self) -> list[Book]:
+    def load_books(self) -> list["Book"]:
         """
         Загружает список книг из файла.
 
         Returns:
-            List[Book]: Список словарей с данными о книгах.
+            list[Book]: Список словарей с данными о книгах.
         """
 
         if os.path.exists(self.filename):
