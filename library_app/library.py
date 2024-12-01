@@ -1,5 +1,4 @@
 from book import Book
-from config import DATABASE_FILE_PATH
 from storage import Storage
 
 
@@ -12,14 +11,14 @@ class Library:
         storage (Storage): Объект для работы с хранилищем данных.
     """
 
-    def __init__(self):
+    def __init__(self, storage: Storage):
         """
         Инициализирует объект библиотеки.
 
         Загружает книги из хранилища при инициализации.
         """
         self.books: list[Book] = []
-        self.storage: Storage = Storage(DATABASE_FILE_PATH)
+        self.storage: Storage = storage
         # Загрузим книги из БД при инициализации библиотеки
         self.load_books()
 

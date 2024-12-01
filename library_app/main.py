@@ -1,5 +1,6 @@
-from config import BOOK_STATUS
+from config import BOOK_STATUS, DATABASE_FILE_PATH
 from library import Library
+from library_app.storage import Storage
 from utils import get_integer_input
 
 
@@ -7,7 +8,8 @@ def main() -> None:
     """
     Основная функция для управления библиотекой через консольное меню.
     """
-    library = Library()
+    storage = Storage(DATABASE_FILE_PATH)
+    library = Library(storage)
     while True:
         print("\nБиблиотека")
         print("1. Добавить книгу")
