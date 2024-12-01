@@ -1,12 +1,13 @@
 from library_app.library import Library
 from library_app.book import Book
 from library_app.config import BOOK_STATUS
+from library_app.storage import Storage
 
 
 def test_add_book(tmpdir):
     filename = tmpdir.join("test_library.json")
-    library = Library()
-    library.storage.filename = filename
+    storage = Storage(filename)
+    library = Library(storage)
 
     book = library.add_book("Test Book", "Test Author", 2023)
     assert book.title == "Test Book"
@@ -21,8 +22,8 @@ def test_add_book(tmpdir):
 
 def test_remove_book(tmpdir):
     filename = tmpdir.join("test_library.json")
-    library = Library()
-    library.storage.filename = filename
+    storage = Storage(filename)
+    library = Library(storage)
 
     library.add_book("Test Book", "Test Author", 2023)
     library.remove_book(1)
@@ -33,8 +34,8 @@ def test_remove_book(tmpdir):
 
 def test_find_books(tmpdir):
     filename = tmpdir.join("test_library.json")
-    library = Library()
-    library.storage.filename = filename
+    storage = Storage(filename)
+    library = Library(storage)
 
     library.add_book("Test Book 1", "Test Author 1", 2023)
     library.add_book("Test Book 2", "Test Author 2", 2023)
@@ -46,8 +47,8 @@ def test_find_books(tmpdir):
 
 def test_update_book_status(tmpdir):
     filename = tmpdir.join("test_library.json")
-    library = Library()
-    library.storage.filename = filename
+    storage = Storage(filename)
+    library = Library(storage)
 
     library.add_book("Test Book", "Test Author", 2023)
     library.update_book_status(1, BOOK_STATUS[2])
